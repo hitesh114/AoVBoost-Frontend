@@ -1,0 +1,41 @@
+body{ background-color: #e6e6e6; }
+
+.App{ display: flex; height: 100vh; padding-top: 15px; }
+
+.header{ background-color: #0c2840; height: 80px; display: flex; align-items: center; justify-content: space-between; }
+.header .logo{ width: 100px; }
+
+.navlinks{ display: flex; column-gap: 30px; padding: 0 15px; color: #77919d; }
+.navlinks a i{ text-decoration: none; color: #77919d; font-weight: 500; }
+.navlinks a:hover{ color: #3ebfd1; }
+.nav-link.active { color: #3ebfd1; font-weight: bold; }
+i { font-size: 15px; margin-right: 5px;}
+
+
+.box_sty1{ background-color: #fff; padding: 25px; box-shadow: 0 0 5px #00000030;}
+
+.col-gap-15{ column-gap: 15px; }
+
+.btn{ font-weight: 500; border-radius: 4px; }
+.btn-sty1{ background-color: #0c2840; color: #fff; }
+.btn-sty1:hover{ background-color: #3cbfd3; color: #0c2840; }
+
+.tbl-sty1{ border: #eee solid 1px; margin-bottom: 0; }
+.tbl-sty1 thead th{ background-color: #e8eefa; }
+.tbl-sty1 tfoot th{ background-color: #f7f7f7; }
+
+.create-offer{ border: #eee solid 1px; padding: 15px; }
+.create-offer label{ margin-bottom: 5px; }
+
+.switch {position: relative; display: inline-block; width: 34px; height: 20px;}
+.switch input { opacity: 0; width: 0; height: 0;}
+.slider { position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;background-color: #ccc;transition: .4s;border-radius: 20px;}
+.slider:before {position: absolute;content: "";height: 16px;width: 16px;left: 2px;bottom: 2px;background-color: white;transition: .4s;border-radius: 50%;}
+input:checked + .slider {background-color: #2196F3;}
+input:checked + .slider:before { transform: translateX(14px);}
+
+.offer-preview {position: fixed; right: 30px; top: 100px; width: 475px; max-height: 80%;overflow-y: auto;background-color: #fff;box-shadow: 0 0 5px #00000030;padding: 15px;z-index: 1000;color: 000000;}
+.add-button:hover { background-color: var(--hover-bg-color, inherit) !important;color: var(--hover-text-color, inherit) !important;}
+
+.loader {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(255, 255, 255, 0.5);display: flex;align-items: center;justify-content: center;z-index: 10;}
+.box_sty1 {z-index: 20;}
