@@ -4,14 +4,12 @@ import TableComponent from "../Components/TableComponents.js";
 import { fetchOffer, GetItems } from "../Apis/APIOffer.js";
 import Loader from "../Components/Loader.js";
 
-
 const Offers = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("All");
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [tableLoading, setTableLoading] = useState(true); // New loading state for the table
 
   const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -30,46 +28,44 @@ const Offers = () => {
   };
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms debounce
-
-    
   useEffect(() => {
     const applyFilters = () => {
       setIsLoading(true);
-  const newFilteredData = data
-    .filter((offer) =>
-      offer.offer.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .filter((offer) => {
-      if (filterValue === "Enabled") return offer.enabled;
-      if (filterValue === "Disabled") return !offer.enabled;
-      return true; // For "All"
-    });
-    setFilteredData(newFilteredData);
-    setTimeout(() => {
-      setIsLoading(false); // Set loading to false after a delay
-    }, 1000);
-  };
-  applyFilters();
-}, [data, debouncedSearchTerm, filterValue]);
+      const newFilteredData = data
+        .filter((offer) =>
+          offer.offer.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .filter((offer) => {
+          if (filterValue === "Enabled") return offer.enabled;
+          if (filterValue === "Disabled") return !offer.enabled;
+          return true; // For "All"
+        });
+      setFilteredData(newFilteredData);
+      setTimeout(() => {
+        setIsLoading(false); // Set loading to false after a delay
+      }, 1000);
+    };
+    applyFilters();
+  }, [data, debouncedSearchTerm, filterValue]);
 
-    useEffect(() => {
-      const loadData = async () => {
-        try {
-          setIsLoading(true);
-          const fetchedData = await fetchOffer();
-          console.log("Fetched Data in Offers:", fetchedData);
-          setData(fetchedData);
-        } catch (error) {
-          console.error("Error fetching offers:", error);
-        } finally {
-          setTimeout(() => {
-            setIsLoading(false); // Set loading to false after a delay
-          }, 1000); // Adjust the delay time (in milliseconds) as needed
-        }
-      };
-      loadData();
-    }, []);
-  
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        const fetchedData = await fetchOffer();
+        console.log("Fetched Data in Offers:", fetchedData);
+        setData(fetchedData);
+      } catch (error) {
+        console.error("Error fetching offers:", error);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false); // Set loading to false after a delay
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
+      }
+    };
+    loadData();
+  }, []);
+
   const handleDataChange = (newData) => {
     setData(newData);
     setFilterValue("All");
@@ -85,7 +81,7 @@ const Offers = () => {
         data={filteredData}
       />
       <TableComponent data={filteredData} setData={handleDataChange} />
-      </div>
+    </div>
   );
 };
 
